@@ -334,6 +334,39 @@ body {
 
 .logout-btn:hover { color: var(--red); }
 
+/* 1. The Main Background Container */
+.str-chat__empty-channel,
+.str-chat__channel-empty,
+.str-chat__no-messages {
+  background: var(--bg) !important; /* Matches your main chat background */
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* 2. The Icon (The chat bubble logo) */
+.str-chat__empty-channel svg,
+.str-chat__channel-empty svg,
+.str-chat__no-messages svg {
+  fill: var(--text-2) !important;
+  opacity: 0.3 !important; /* Keeps it subtle */
+  width: 60px !important;
+  height: 60px !important;
+}
+
+/* 3. The "No chats here yet..." Text */
+.str-chat__empty-channel-text,
+.str-chat__channel-empty-text,
+.str-chat__no-messages-text,
+.str-chat__empty-channel p {
+  color: var(--text-2) !important;
+  font-family: var(--font-body) !important;
+  font-size: 15px !important;
+  margin-top: 16px !important;
+  font-weight: 500 !important;
+}
+
 /* Title row */
 .sidebar-title-row {
   padding: 18px 20px 6px;
@@ -686,7 +719,8 @@ body {
 }
 
 /* Message list */
-.str-chat__list {
+.str-chat__list, 
+.str-chat__main-panel-inner {
   background: var(--bg) !important;
   padding: 16px !important;
 }
@@ -869,9 +903,7 @@ body {
   overflow: hidden !important;
 }
 
-/* ═══════════════════════════════════════════════════════════
-   IMPROVED MOBILE NAVIGATION CSS
-   ═══════════════════════════════════════════════════════════ */
+/* Mobile navigation */
 @media (max-width: 768px) {
   .app-root {
     position: relative;
