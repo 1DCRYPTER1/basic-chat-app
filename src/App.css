@@ -723,6 +723,7 @@ body {
 .str-chat__main-panel-inner {
   background: var(--bg) !important;
   padding: 16px !important;
+  
 }
 
 .str-chat__message-simple__content {
@@ -891,8 +892,69 @@ body {
 
 /* Thread */
 .str-chat__thread {
-  background: var(--bg-2) !important;
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 2000 !important; /* Ensure it stays above everything */
+    background: var(--bg) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    border-left: none !important;
   border-left: 1px solid var(--border) !important;
+}
+
+/* 2. Style the Thread Header */
+  .str-chat__thread-header {
+    background: var(--bg-2) !important;
+    border-bottom: 1px solid var(--border) !important;
+    height: 64px !important; /* Match main header height */
+    display: flex !important;
+    align-items: center !important;
+    padding: 0 16px !important;
+  }
+
+  .str-chat__thread-header-title {
+    color: var(--text-1) !important;
+    font-family: var(--font-display) !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+  }
+
+  /* 3. Style the Thread Close Button */
+  .str-chat__thread-header .str-chat__square-button {
+    background: var(--bg-3) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 50% !important;
+    width: 36px !important;
+    height: 36px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  /* 4. Fix Thread Message List Padding */
+  .str-chat__thread .str-chat__list {
+    padding-top: 20px !important;
+    background: var(--bg) !important;
+  }
+
+  /* 5. Fix Thread Input */
+  .str-chat__thread .str-chat__message-input {
+    background: var(--bg-2) !important;
+    border-top: 1px solid var(--border) !important;
+    padding: 12px 16px calc(12px + env(safe-area-inset-bottom)) !important;
+  }
+
+  /* 6. Fix "Also send as direct message" text */
+  .str-chat__checkbox-label {
+    color: var(--text-2) !important;
+    font-size: 13px !important;
+  }
+
+/* 7. Ensure main chat doesn't shrink when thread is open */
+.str-chat__main-panel--thread-open {
+  width: 100% !important;
 }
 
 /* Window */
@@ -953,6 +1015,13 @@ body {
   .mobile-chat-active .main-panel {
     transform: translateX(0);
     visibility: visible;
+  }
+
+  .str-chat__message-input {
+    position: sticky !important;
+    bottom: 0 !important;
+    background: var(--bg-2) !important;
+    z-index: 10;
   }
 
   /* Back Button Styling */
@@ -1055,3 +1124,106 @@ body {
   cursor: pointer;
   margin-right: 10px;
 }
+
+/* 🗑️ Delete Chat Button Styling */
+.delete-chat-btn {
+  background: rgba(239, 68, 68, 0.1); /* Subtle red tint */
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #ef4444; /* Bright Red */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  margin-left: 12px;
+  flex-shrink: 0;
+}
+
+.delete-chat-btn:hover {
+  background: #ef4444;
+  color: white;
+  border-color: #ef4444;
+  box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
+}
+
+/* Ensure it doesn't get hidden behind the back button on mobile */
+@media (max-width: 768px) {
+  .str-chat__channel-header {
+    padding-right: 16px !important;
+  }
+  
+  .delete-chat-btn {
+    padding: 6px;
+    width: 34px;
+    height: 34px;
+  }
+}
+
+/* 📝 Edit Message Modal Styling */
+.str-chat__modal {
+  background: rgba(0, 0, 0, 0.8) !important; /* Dim the background */
+  backdrop-filter: blur(8px);
+}
+
+.str-chat__modal-inner {
+  background: var(--bg-2) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 20px !important;
+  padding: 24px !important;
+  max-width: 500px !important;
+  width: 90% !important;
+}
+
+/* Align the buttons to the right and add spacing */
+.str-chat__edit-message-form-options {
+  display: flex !important;
+  justify-content: flex-end !important;
+  gap: 12px !important;
+  margin-top: 20px !important;
+  padding: 0 !important;
+}
+
+/* Style the Cancel button */
+.str-chat__edit-message-form-options button:first-child {
+  background: transparent !important;
+  border: 1px solid var(--border) !important;
+  color: var(--text-2) !important;
+  border-radius: 10px !important;
+  padding: 10px 20px !important;
+  font-weight: 600 !important;
+  font-family: var(--font-display) !important;
+}
+
+/* Style the Send (Save) button */
+.str-chat__edit-message-form-options button:last-child {
+  background: linear-gradient(135deg, var(--blue), var(--indigo)) !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 10px !important;
+  padding: 10px 24px !important;
+  font-weight: 600 !important;
+  font-family: var(--font-display) !important;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3) !important;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .str-chat__modal-inner {
+    padding: 16px !important;
+    width: 95% !important;
+  }
+
+  .str-chat__edit-message-form-options {
+    width: 100% !important;
+  }
+
+  .str-chat__edit-message-form-options button {
+    flex: 1 !important; /* Make buttons equal width on mobile */
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+  }
+}
+
